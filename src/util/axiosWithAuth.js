@@ -1,16 +1,16 @@
 import axios from 'axios'
-import cookie from 'react-cookies'
 import Cryptr from 'cryptr'
-const client = process.env.REACT_APP_CLIENT_ID
-const secret = process.env.REACT_APP_CLIENT_SECRET
+const client = process.env.REACT_APP_CLIENT_ID || 'YOURCLIENTID'
+const secret = process.env.REACT_APP_CLIENT_SECRET || 'YOURCLIENTSECRET'
 
+//Base 64 Encode client:secret
 const api_key = btoa(`${client}:${secret}`);
 const baseURL = 'http://localhost:2019'
 
 
 export const axiosWithAuth = () => {
     let {
-        access_token,
+        token,
         expires,
         token_type
     } = JSON.parse(localStorage.getItem("token"))
@@ -19,13 +19,14 @@ export const axiosWithAuth = () => {
         baseURL: baseURL,
         timeout: 1000,
         headers: {
-            Authorization: `${token_type} ${access_token}`
+            Authorization: `${token_type} ${token}`
         }
     })
 }
 
 
 export const loginHandler = (u) => {
+    console.log(u)
     axios
         .post(`${baseURL}/oauth/token`, `grant_type=password&username=${u.username}&password=${u.password}`, {
             headers: {
@@ -33,24 +34,31 @@ export const loginHandler = (u) => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-        .then(res =>{
-            if(res.status === 200){
-                u.secret ? encrypter(u.secret,res.data)
-                :localStorage.setItem('token',JSON.stringify({
-                    ...res.data,
-                    refresh_token:'',
-                    expires_in:Date(res.data.expires_in)
-                })) 
+        .then(res => {
+            if (res.status === 200) {
+                u.secret ? encrypter(u.secret, res.data) :
+                    localStorage.setItem('token', JSON.stringify({
+                        token: res.data.access_token,
+                        token_type: res.data.token_type,
+                        expires: Date(res.data.expires_in)
+                    }))
+            } else {
+                console.log(res.status)
             }
-            console.log(JSON.parse(localStorage.getItem('token')))      
+            console.log(JSON.parse(localStorage.getItem('token')))
         })
-        .catch(err => console.log(err))
+        .catch(res => alert(res))
 }
 
 
-export const encrypter = (secret,data) =>{
+export const encrypter = (secret, data) => {
     //Encrypts Refresh Token
     const crypto = new Cryptr(secret)
-    const encrypt = crypto.encrypt(data)
-    localStorage.setItem('token',JSON.stringify({...data,refresh_token:encrypt}))
+    const encrypt = crypto.encrypt(data.refresh_token)
+    localStorage.setItem('token', JSON.stringify({
+        refresh_token: encrypt,
+        token: data.access_token,
+        token_type: data.token_type,
+        expires: Date(data.expires_in)
+    }))
 }

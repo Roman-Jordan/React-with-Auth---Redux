@@ -10,10 +10,14 @@ const UsersList =() =>{
         .catch(err =>alert(err))
     },[])
 
-    console.log(users)
+    console.log('USERS',users)
     return(
         <div>
-            Users
+           {users && users.map(user =>{
+               return(
+                   <p>{user.username}</p>
+               )
+           })}
         </div>
     )
 }
