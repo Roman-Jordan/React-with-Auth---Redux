@@ -1,10 +1,11 @@
 import React from 'react'
 import Header from './headers'
 
-const PublicMainView = () =>{
-
+const PublicMainView = (props) =>{
+    console.log(props)
     return(
         <Header />
+        
     )
 
 }
