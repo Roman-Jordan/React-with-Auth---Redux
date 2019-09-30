@@ -1,12 +1,21 @@
 import React from 'react'
-
-const Header = () =>{
+import {connect} from 'react-redux'
+import {logOut} from '../../../store/actions'
+const Header = (props) =>{
+    console.log(props)
     return(
         <header className="mainHeader" >
             <p>I am a Protected Header</p>
+            <button onClick={props.logOut}>Log Out</button>
         </header>
 
     )
 }
 
-export default Header;
+const mapStateToProps = state =>{
+    return {
+        ...state.loggedIn
+    }
+}
+
+export default connect(mapStateToProps,{logOut})(Header);

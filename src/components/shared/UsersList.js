@@ -7,7 +7,7 @@ const UsersList =() =>{
         axiosWithAuth()
         .get('/users/users')
         .then(res =>setUsers(res.data))
-        .catch(err =>alert(err))
+        .catch(err =>console.log(err))
     },[])
 
     console.log('USERS',users)
@@ -15,7 +15,7 @@ const UsersList =() =>{
         <div>
            {users && users.map(user =>{
                return(
-                   <p>{user.username}</p>
+                   <p key={user.userid}>{user.username}</p>
                )
            })}
         </div>

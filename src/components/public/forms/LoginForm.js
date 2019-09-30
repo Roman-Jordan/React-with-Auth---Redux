@@ -1,19 +1,23 @@
 import React,{useState} from 'react';
+import { connect } from "react-redux";
 import {loginHandler} from '../../../util/axiosWithAuth'
 
 const LoginForm = props =>{
-    let {setLoggedIn}=props
+    console.log("With Redux",props)
+    
     let [user,setUser] = useState({})
     let username = user.username ? user.username:'';
     let password = user.password ? user.password:'';
+    
     const change= (e) =>{
       setUser({...user,[e.target.name]:e.target.value})
     }
+    
     const onSubmit= (e) =>{
       e.preventDefault()
-      loginHandler(user)
-      
+      props.loginHandler(user)
     }
+    
     return(
       <form onSubmit={onSubmit}>
         <input onChange={change} name="username" placeholder="Username" value={username} type="text"/>
@@ -23,4 +27,10 @@ const LoginForm = props =>{
     )
   }
 
-  export default LoginForm
+  const mapStateToProps = state =>{
+    return{
+      ...state.loggedIn
+    }
+  }
+  
+  export default connect(mapStateToProps,{loginHandler})(LoginForm);

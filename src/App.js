@@ -1,25 +1,34 @@
-import React,{useState,useEffect} from 'react';
+import React from 'react';
 import './App.scss';
 import {Route} from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import PublicMainView from './components/public'
 import PrivateMainView from './components/private'
 import UsersList from './components/shared/UsersList'
+import { connect } from "react-redux";
 
-function App() {
-  const [loggedIn,setLoggedIn] = useState(false)
-  const [error,setError] = useState()
+
+function App(props) {
+
+  let {loggedIn} = props
+  
   console.log(localStorage.getItem('token'))
   return (
     <div className="App">
-      
-      {error && <p>{error}</p>}
       {loggedIn ? <PrivateRoute path="/" component={PrivateMainView}  />
-      :<Route match path="/" logIn={setLoggedIn} render={()=><PublicMainView logIn={setLoggedIn}/>} />}
-      {localStorage.getItem('token') && <UsersList />}
+      :<Route match path="/" component={PublicMainView} />}
+      {loggedIn && <UsersList />}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = state =>{
+  return{
+    ...state.loggedIn
+  }
+}
+
+export default connect(mapStateToProps,{})(App);
+
+
 

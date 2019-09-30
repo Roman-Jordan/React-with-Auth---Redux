@@ -1,5 +1,7 @@
 import axios from 'axios'
 import Cryptr from 'cryptr'
+
+//Have your own secret? Plug it in here.
 const client = process.env.REACT_APP_CLIENT_ID || 'YOURCLIENTID'
 const secret = process.env.REACT_APP_CLIENT_SECRET || 'YOURCLIENTSECRET'
 
@@ -8,12 +10,15 @@ const api_key = btoa(`${client}:${secret}`);
 const baseURL = 'http://localhost:2019'
 
 
+//Finds Token and Checks when it expires
 export const axiosWithAuth = () => {
     let {
         token,
         expires,
         token_type
     } = JSON.parse(localStorage.getItem("token"))
+
+    expires && expires > Date.now() && console.log("Token Has Expired")
 
     return axios.create({
         baseURL: baseURL,
@@ -25,7 +30,7 @@ export const axiosWithAuth = () => {
 }
 
 
-export const loginHandler = (u) => {
+export const loginHandler = u => dispatch => {
     console.log(u)
     axios
         .post(`${baseURL}/oauth/token`, `grant_type=password&username=${u.username}&password=${u.password}`, {
@@ -42,12 +47,13 @@ export const loginHandler = (u) => {
                         token_type: res.data.token_type,
                         expires: Date(res.data.expires_in)
                     }))
+                    dispatch({type:"FETCH_SUCCESS",payload:true})
             } else {
-                console.log(res.status)
+                dispatch({type:"FETCH_FAIL",payload:false})
             }
             console.log(JSON.parse(localStorage.getItem('token')))
         })
-        .catch(res => alert(res))
+        .catch(err => dispatch({type:"FETCH_FAIL",payload:false}))
 }
 
 
