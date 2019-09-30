@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import {loginHandler} from '../../../util/axiosWithAuth'
 
 const LoginForm = props =>{
-    console.log("With Redux",props)
-    
+
     let [user,setUser] = useState({})
     let username = user.username ? user.username:'';
     let password = user.password ? user.password:'';

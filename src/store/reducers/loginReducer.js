@@ -13,12 +13,9 @@ export const loginReducer = (state = initialState, action) => {
         fetching: !state.fetching
       }
     case LOGOUT:
-      console.log('logOut')
       return{
-        ...state,
         loggedIn:false
       }
-
     case FETCH_ERROR:
       return{
         ...state,

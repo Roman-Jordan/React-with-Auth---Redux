@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {logOut} from '../../../store/actions'
 const Header = (props) =>{
-    console.log(props)
     return(
         <header className="mainHeader" >
             <p>I am a Protected Header</p>

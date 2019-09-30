@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {axiosWithAuth} from '../../util/axiosWithAuth'
+import {axiosWithAuth} from '../../../util/axiosWithAuth'
 
 const UsersList =() =>{
     let [users,setUsers]=useState();
@@ -9,16 +9,21 @@ const UsersList =() =>{
         .then(res =>setUsers(res.data))
         .catch(err =>console.log(err))
     },[])
-
-    console.log('USERS',users)
     return(
         <div>
            {users && users.map(user =>{
-               return(
-                   <p key={user.userid}>{user.username}</p>
-               )
+             return  <UserCard key={user.userid} user={user}/>
            })}
         </div>
     )
 }
 export default UsersList;
+
+export const UserCard = (props) =>{
+    let {user} = props
+    return(
+        Object.keys(user).map((userProp,i) =>{
+            return <p key={i}>{`${userProp}: ${user[userProp]}`}</p>
+       })
+    )
+}

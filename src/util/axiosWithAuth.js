@@ -18,6 +18,7 @@ export const axiosWithAuth = () => {
         token_type
     } = JSON.parse(localStorage.getItem("token"))
 
+    // This Seems Like it really does nothing. I will circle back to this RJ
     expires && expires > Date.now() && console.log("Token Has Expired")
 
     return axios.create({
@@ -29,9 +30,7 @@ export const axiosWithAuth = () => {
     })
 }
 
-
 export const loginHandler = u => dispatch => {
-    console.log(u)
     axios
         .post(`${baseURL}/oauth/token`, `grant_type=password&username=${u.username}&password=${u.password}`, {
             headers: {
@@ -51,7 +50,6 @@ export const loginHandler = u => dispatch => {
             } else {
                 dispatch({type:"FETCH_FAIL",payload:false})
             }
-            console.log(JSON.parse(localStorage.getItem('token')))
         })
         .catch(err => dispatch({type:"FETCH_FAIL",payload:false}))
 }
