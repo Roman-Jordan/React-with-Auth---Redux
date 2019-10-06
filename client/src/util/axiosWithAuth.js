@@ -2,12 +2,12 @@ import axios from 'axios'
 import Cryptr from 'cryptr'
 
 //Have your own secret? Plug it in here.
-const client = process.env.REACT_APP_CLIENT_ID || 'YOURCLIENTID'
-const secret = process.env.REACT_APP_CLIENT_SECRET || 'YOURCLIENTSECRET'
+const client = process.env.REACT_APP_CLIENT_ID || 'hello'
+const secret = process.env.REACT_APP_CLIENT_SECRET || 'roman'
 
 //Base 64 Encode client:secret
 const api_key = btoa(`${client}:${secret}`);
-const baseURL = 'http://localhost:2019'
+const baseURL = 'http://localhost:8080'
 
 
 //Finds Token and Checks when it expires
@@ -53,6 +53,7 @@ export const loginHandler = u => dispatch => {
         })
         .catch(err => dispatch({type:"FETCH_FAIL",payload:false}))
 }
+
 
 
 export const encrypter = (secret, data) => {
