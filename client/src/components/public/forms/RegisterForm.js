@@ -11,7 +11,7 @@ const RegisterForm = props => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/roles/roles")
+      .get("https://api.yesamerica.com/roles/roles")
       .then(res => {
         setUserRoles(res.data);
       })
@@ -68,6 +68,8 @@ export const Provider = () => {
       <p>Hello from Provider</p>
       <form>
         <SharedFeilds />
+        <input type="text" name="industry" />
+        
       </form>
     </>
   );
@@ -120,10 +122,10 @@ export const SharedFeilds = () => {
 //******************************************** */
 // PROVIDER:
 
-// First Name,	R/S, TEXT
-// Last Name	  R/S  TEXT
-// Company	    R    TEXT
-// Industry	    O    TEXT
+// First Name,	R/S, TEXT --
+// Last Name	  R/S  TEXT --
+// Company	    R    TEXT --
+// Industry	    O    TEXT --
 // Email	      R/S
 // Employees	  R    NUMB
 // Direct phone	R    NUMB
@@ -154,12 +156,12 @@ export const SharedFeilds = () => {
 
 // COMPANIES:
 
-// First Name,	R/S, TEXT
-// Last Name	  R/S  TEXT
-// Company	    R    TEXT
-// Industry	    O    TEXT
-// Email	      R/S
-// Employees	  R    NUMB
+// First Name,	R/S, TEXT --
+// Last Name	  R/S  TEXT --
+// Company	    R    TEXT --
+// Industry	    O    TEXT --
+// Email	      R/S     
+// Employees	  R    NUMB 
 // Direct phone	R    NUMB
 // Mobile phone	O    NUMB
 
