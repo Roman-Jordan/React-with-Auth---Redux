@@ -3,15 +3,17 @@ import { connect } from "react-redux";
 import { loginHandler } from "../../../util/axiosWithAuth";
 import axios from "axios";
 import { Route, Switch } from "react-router-dom";
+import "./forms.scss";
+
 const RegisterForm = props => {
-  console.log(props);
-
   const [userRoles, setUserRoles] = useState();
-  const [role, setRole] = useState();
-
+  const [activeRole, setActiveRole] = useState();
+  const [newUser, setNewUser] = useState({});
+  console.log("newuser: ", newUser);
+  console.log("ActiveRole: ", activeRole);
   useEffect(() => {
     axios
-      .get("https://api.yesamerica.com/roles/roles")
+      .get("http://localhost:8080/roles/roles")
       .then(res => {
         setUserRoles(res.data);
       })
@@ -19,35 +21,39 @@ const RegisterForm = props => {
   }, []);
 
   const change = e => {
-    e.target.value &&
-      props.history.push(`/register/${e.target.value}`) &&
-      setRole(e.target.value);
+    e.preventDefault();
+    const role = e.target.value;
+    role &&
+      // && setNewUser({...newUser,role:role})
+      // && setActiveRole(role)
+      props.history.push(`/register/${role}`);
   };
 
   return (
-    <>
+    <div className="register-form">
       <h1>Register as:</h1>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+        }}
+      >
+        {activeRole && <p>{`${activeRole.toUpperCase()} Role Selected`}</p>}
 
-      <select onChange={change}>
-        <option>Select Role</option>
-        {userRoles &&
-          userRoles.map((role, i) => {
-            return (
-              <option value={role} key={i}>
-                {role}
-              </option>
-            );
-          })}
-      </select>
-      {role && <p>{`${role.toUpperCase()} Role Selected`}</p>}
-
-      <Switch>
-        <Route exact path="/register/provider" render={Provider} />
-        <Route exact path="/register/sponsor" component={Sponsor} />
-        <Route exact path="/register/company" component={Company} />
-        <Route exact path="/register/consumer" component={Consumer} />
-      </Switch>
-    </>
+        <Switch>
+          <Route
+            exact
+            path="/register"
+            render={() => (
+              <RoleSelector change={change} userRoles={userRoles} />
+            )}
+          />
+          <Route exact path="/register/provider" render={Provider} />
+          <Route exact path="/register/sponsor" component={Sponsor} />
+          <Route exact path="/register/company" component={Company} />
+          <Route exact path="/register/consumer" component={Consumer} />
+        </Switch>
+      </form>
+    </div>
   );
 };
 
@@ -62,15 +68,31 @@ export default connect(
   { loginHandler }
 )(RegisterForm);
 
+export const RoleSelector = props => {
+  const { userRoles, change } = props;
+  return (
+    <div className="role-container">
+      {userRoles &&
+        userRoles.map((role, i) => {
+          return (
+            <div className="role-selector-radio" key={i}>
+              <button name="selected-roll" value={role} onClick={change}>
+                {role}
+              </button>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
+
 export const Provider = () => {
   return (
     <>
       <p>Hello from Provider</p>
-      <form>
-        <SharedFeilds />
-        <input type="text" name="industry" />
-        
-      </form>
+
+      <SharedFeilds />
+      <input type="text" name="industry" />
     </>
   );
 };
@@ -78,33 +100,41 @@ export const Provider = () => {
 export const Consumer = () => {
   return (
     <>
-      <p>Hello from Consumer</p>
-      <form>
-        <SharedFeilds />
-      </form>
+      <SharedFeilds />
     </>
   );
 };
 
 export const Company = () => {
+
   return (
     <>
-      <p>Hello from Company</p>
-      <form>
-        <SharedFeilds />
-        <input type="text" name="company" placeholder="Company Name" />
-      </form>
+      <SharedFeilds />
+      <input type="text" name="company" placeholder="Company" />
+      <input type="text" placeholder="Industry" />
+      <input type="text" placeholder="Primary Address" /> 
+      <input type="number" placeholder="Employee Count" />
     </>
+// First Name,	R/S, TEXT --
+// Last Name	  R/S  TEXT --
+// Company	    R    TEXT --
+// Industry	    O    TEXT --
+// Email	      R/S
+// Employees	  R    NUMB
+// Direct phone	R    NUMB
+// Mobile phone	O    NUMB
+
+// Website	    O    URL-
+// Address      R
+
+// Descrip      O    LONG
   );
 };
 
 export const Sponsor = () => {
   return (
     <>
-      <p>Hello from Sponsor</p>
-      <form>
-        <SharedFeilds />
-      </form>
+      <SharedFeilds />
     </>
   );
 };
@@ -114,7 +144,7 @@ export const SharedFeilds = () => {
     <>
       <input type="text" placeholder="First Name" />
       <input type="text" placeholder="Last Name" />
-      <input type="email" placeholder="Email" required />
+      <input type="email" placeholder="Email" />
     </>
   );
 };
@@ -160,8 +190,8 @@ export const SharedFeilds = () => {
 // Last Name	  R/S  TEXT --
 // Company	    R    TEXT --
 // Industry	    O    TEXT --
-// Email	      R/S     
-// Employees	  R    NUMB 
+// Email	      R/S
+// Employees	  R    NUMB
 // Direct phone	R    NUMB
 // Mobile phone	O    NUMB
 
