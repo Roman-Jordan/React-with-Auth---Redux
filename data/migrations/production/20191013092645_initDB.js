@@ -1,20 +1,20 @@
 exports.up = function(knex) {
-  return knex.schema.createTable("locations", col => {
+  return knex.schema.createTable("us_location_data", col => {
     col.increments().primary();
-    col
-      .integer("zip", 10)
-      .unique()
-      .notNullable();
-    col.string("city", 35);
-    col.string("state", 2);
-    col.string("county", 50);
-    col.string("time_zone", 50);
+    col.integer("zip", 5).notNullable();
+    col.text("zipType", 1).notNullable();
+    col.string("city", 30).notNullable();
+    col.string("county", 50).notNullable();
+    col.string("state", 50).notNullable();
+    col.string("stateAbbr", 2).notNullable();
+    col.string("areaCode",20).notNullable();
+    col.string("TimeZone", 50).notNullable();
+    col.integer("UTC", 2).notNullable();
+    col.text("DST", 1).notNullable();
     col.float("latitude", 14, 10).notNullable();
     col.float("longitude", 14, 10).notNullable();
-    col.string("country", 2);
-    col.integer("estimated_population", 50);
   });
 };
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists("locations");
+  return knex.schema.dropTableIfExists("us_location_data");
 };
