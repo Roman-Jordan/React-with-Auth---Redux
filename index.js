@@ -4,11 +4,11 @@ require("dotenv").config();
 const chalk = require("chalk");
 const lg = console.log;
 const primaryRouter = require("./api/server");
-
+const cors = require('cors')
 //terminal colors
 const blu = chalk.blue;
 const grn = chalk.green;
-
+server.use(cors())
 server.use(express.json());
 server.use("/api", primaryRouter);
 

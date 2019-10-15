@@ -4,21 +4,21 @@ import { loginHandler } from "../../../util/axiosWithAuth";
 import axios from "axios";
 import { Route, Switch } from "react-router-dom";
 import "./forms.scss";
-
+import Zip from './Zip'
 const RegisterForm = props => {
   const [userRoles, setUserRoles] = useState();
   const [activeRole, setActiveRole] = useState();
   const [newUser, setNewUser] = useState({});
   console.log("newuser: ", newUser);
   console.log("ActiveRole: ", activeRole);
-  useEffect(() => {
-    axios
-      .get("http://localhost:8080/roles/roles")
-      .then(res => {
-        setUserRoles(res.data);
-      })
-      .catch(err => alert(err));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:8080/roles/roles")
+  //     .then(res => {
+  //       setUserRoles(res.data);
+  //     })
+  //     .catch(err => alert(err));
+  // }, []);
 
   const change = e => {
     e.preventDefault();
@@ -31,6 +31,7 @@ const RegisterForm = props => {
 
   return (
     <div className="register-form">
+      <Zip/>
       <h1>Register as:</h1>
       <form
         onSubmit={e => {

@@ -13,7 +13,6 @@ exports.up = function(knex) {
     col.text("DST", 1).notNullable();
     col.float("latitude", 14, 10).notNullable();
     col.float("longitude", 14, 10).notNullable();
-
   });
 };
 exports.down = function(knex) {
