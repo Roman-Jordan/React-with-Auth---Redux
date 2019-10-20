@@ -1,7 +1,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable("us_location_data", col => {
     col.increments().primary();
-    col.integer("zip", 5).notNullable().index();
+    col.string("zip", 5).notNullable().index();
     col.text("zipType", 1).notNullable();
     col.string("city", 30).notNullable();
     col.string("county", 50).notNullable();
