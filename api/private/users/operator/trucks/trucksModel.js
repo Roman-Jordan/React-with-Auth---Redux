@@ -6,7 +6,7 @@ module.exports={
     add,
     editById
 }
-const table='use'
+const table='trucks'
 function findAll(){
     return db(table)
 }

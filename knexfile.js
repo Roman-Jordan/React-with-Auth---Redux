@@ -11,10 +11,10 @@ module.exports = {
       filename: "./data/dev.sqlite3"
     },
     migrations: {
-      directory: "./data/migrations"
+      directory: "./data/migrations/dev"
     },
     seeds: {
-      directory: "./data/seeds"
+      directory: "./data/seeds/dev"
     }
   },
   staging: {
