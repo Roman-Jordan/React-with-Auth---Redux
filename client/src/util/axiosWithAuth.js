@@ -7,7 +7,7 @@ const secret = process.env.REACT_APP_CLIENT_SECRET || 'roman'
 
 //Base 64 Encode client:secret
 const api_key = btoa(`${client}:${secret}`);
-const baseURL = 'http://localhost:8080'
+const baseURL = 'http://localhost:5000'
 
 
 //Finds Token and Checks when it expires

@@ -6,3 +6,5 @@
 
 ```sh
 # In your terminal
+npm i && npm run serve && cd ./client && npm i && npm start
+```
