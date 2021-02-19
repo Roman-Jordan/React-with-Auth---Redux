@@ -1,24 +1,19 @@
-const primaryRouter = require('express').Router()
+const primaryRouter = require("express").Router();
 
-//SubRoutes of API
-const locationsRouter = require('./public/locations/locations')
-const users = require('./private/users/users')
-const authPortal = require('./auth/portal')
+//Middleware
+const jwt = require("./auth/preAuth/jwt");
 
-//Call Errors Last
-const errorRouter = require('./errors/errors')
+//Bring in the Routes
+const publicRouter = require("./public/publicRouter");
+const privateRouter = require("./private/privateRouter");
 
-//LOGIN REGISTER
-primaryRouter.use('/',authPortal)
+//Login, Register, GoogleAuth, FaceBookAuth, GitHubAuth
+const authRouter = require("./auth/auth");
 
-//PUBLIC ROUTES
-primaryRouter.use('/locations',locationsRouter)
+//Implement Routes
+primaryRouter.use("/", authRouter);
+primaryRouter.use("/", publicRouter);
 
-//PRIVATE ROUTES
-primaryRouter.use('/users',users)
+primaryRouter.use("/", jwt.chkToken(), privateRouter);
 
-//Handle any errors coming into API
-primaryRouter.use('*',errorRouter)
-
-module.exports = primaryRouter
-
+module.exports = primaryRouter;

@@ -1,22 +1,21 @@
 const router = require("express").Router();
-const dbModel = require("./userModel");
-const usersScrubber = require("./usersScrubber");
+const dbModel = require("./questionsModel");
+const questionsScrubber = require("./questionsScrubber");
 
 router.get("/", (req, res) => {
   return dbModel
     .findAll()
     .then(p => {
-      res.status(200).json({ message: `SUCCESS`, roles:[...p] });
+      res.status(200).json({ message: `SUCCESS`, questions:[...p] });
     })
     .catch(e => {
       res.status(404).json({ message: "SOMEMESSAGE", ...e });
     });
 });
-
 router.get("/:id", (req, res) => {
   const { id } = req.params;
   return dbModel
-    .findAllById(id)
+    .findById(id)
     .then(p => {
       res.status(200).json({ message: `SUCCESS`, ...p });
     })
@@ -25,7 +24,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.post("/", usersScrubber, (req, res) => {
+router.post("/", questionsScrubber, (req, res) => {
   const { body } = req;
   return dbModel
     .add(body)
@@ -49,7 +48,6 @@ router.put("/:id", (req, res) => {
       res.status(404).json({ message: "SOMEMESSAGE", ...e });
     });
 });
-
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
 

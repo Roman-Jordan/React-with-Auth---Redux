@@ -1,9 +1,17 @@
-// Update with your config settings.
-require("dotenv").config();
-const DBCONNECT =
-  process.env.DBCONNECT || "postgres://postgres@localhost:5432/postgres";
-
 module.exports = {
+  test: {
+    client: "sqlite3",
+    useNullAsDefault: true,
+    connection: {
+      filename: "./data/dev.sqlite3"
+    },
+    migrations: {
+      directory: "./data/migrations"
+    },
+    seeds: {
+      directory: "./data/seeds"
+    },
+  },
   development: {
     client: "sqlite3",
     useNullAsDefault: true,
@@ -11,42 +19,42 @@ module.exports = {
       filename: "./data/dev.sqlite3"
     },
     migrations: {
-      directory: "./data/migrations/dev"
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./data/seeds/dev"
-    }
+      directory: "./data/seeds"
+    },
+    debug:true
   },
   staging: {
     client: "pg",
-    connection: DBCONNECT,
+    connection: process.env.DATABASE_URL_STAGE,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./data/migrations/staging"
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./data/seeds/staging"
-    }
+      directory: "./data/seeds"
+    },
+    debug:true
   },
-
   production: {
     client: "pg",
-    connection: DBCONNECT,
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
       tableName: "knex_migrations",
-      directory: "./data/migrations/production"
+      directory: "./data/migrations"
     },
     seeds: {
-      directory: "./data/seeds/production"
-    },
-    //debug:true,
+      directory: "./data/seeds"
+    }
   }
 };
