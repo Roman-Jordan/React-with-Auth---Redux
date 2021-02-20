@@ -1,8 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import PrivateRoute from "./util/PrivateRoute";
-import PublicMainView from "./components/public";
-import PrivateMainView from "./components/private";
+import PrivateRoute from "../util/PrivateRoute";
+import PublicMainView from "./public";
+import PrivateMainView from "./private";
 import { connect } from "react-redux";
 
 function App(props) {
