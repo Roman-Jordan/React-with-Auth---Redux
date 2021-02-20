@@ -29,7 +29,6 @@ const lg = console.log;
 const blu = chalk.blue;
 const grn = chalk.green;
 
-
 //Implement Routes
 server.use("/", primaryRouter);
 
@@ -44,11 +43,11 @@ server.use("/", (error, req, res, next) => {
 
 //Turn this bad chicken with some style yo
 server.listen(PORT, () => {
-    lg(`
+  lg(`
       ${grn("*************************************")} 
           Server listening on PORT: ${blu(PORT)} 
       ${grn("*************************************")}`);
-    lg(`         ♫♪.ılılıll${blu("|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|")}llılılı.♫♪\n`);
-  });
+  lg(`         ♫♪.ılılıll${blu("|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|")}llılılı.♫♪\n`);
+});
 
 module.exports = server;

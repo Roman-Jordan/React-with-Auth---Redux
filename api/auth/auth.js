@@ -31,31 +31,31 @@ authRouter.post("/register", validateNewUser, (req, res) => {
   user.password = hash;
   dbModel
     .findOrCreateByEmail(user)
-    .then(newUser => {
+    .then((newUser) => {
       payload = {
         ...newUser,
         token_type: "Basic ",
-        token: jwt.genToken(newUser)
+        token: jwt.genToken(newUser),
       };
-     
+
       res.status(201).send({ message: "Welcome da Club Yo!", ...payload });
     })
-    .catch(err => res.status(400).json({ errors: err }));
+    .catch((err) => res.status(400).json({ errors: err }));
 });
 
 //Register ->Requires{username:'',password:''}
 authRouter.post("/login", validateLogin, async (req, res) => {
   const { password } = req.body;
   let user = req.user;
-  
+
   if (user && bcrypt.compareSync(password, user.password)) {
-    user = await dbModel.findOrCreateByEmail(user)
+    user = await dbModel.findOrCreateByEmail(user);
     delete user.password;
-   
+
     payload = {
       ...user,
       token_type: "Basic ",
-      token: jwt.genToken(user)
+      token: jwt.genToken(user),
     };
     res.status(200).json({ message: "Login Success", ...payload });
   } else {
@@ -66,12 +66,16 @@ authRouter.post("/login", validateLogin, async (req, res) => {
 });
 
 //Register ->Requires{username:'',password:''}
-authRouter
-  .delete('/deleteme',jwt.chkToken(),(req,res)=>{
-    const id=req.user.user_id
-    return dbModel.removeUser(id)
-    .then(p=>{res.status(200).json({message:`SUCCESS`,...p})})
-    .catch(e=>{res.status(401).json({message:'SOMEMESSAGE', ...e})})
-})
+authRouter.delete("/deleteme", jwt.chkToken(), (req, res) => {
+  const id = req.user.user_id;
+  return dbModel
+    .removeUser(id)
+    .then((p) => {
+      res.status(200).json({ message: `SUCCESS`, ...p });
+    })
+    .catch((e) => {
+      res.status(401).json({ message: "SOMEMESSAGE", ...e });
+    });
+});
 
 module.exports = authRouter;

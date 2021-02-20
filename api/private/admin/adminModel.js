@@ -6,7 +6,7 @@ module.exports = {
   remove,
   register,
   editById,
-  findByUserName
+  findByUserName,
 };
 
 const table = "admin";
@@ -16,29 +16,21 @@ function findAll() {
 
 function findById(id) {
   id = Array.isArray(id) ? [id] : id;
-  return db(table)
-    .where({ id })
-    .first()
+  return db(table).where({ id }).first();
 }
 
 function findByUserName(admin) {
   if (admin.username) {
     const username = admin.username;
-    return db(table)
-      .where({ username })
-      .first();
+    return db(table).where({ username }).first();
   }
 }
 
 function remove(id) {
-  return db(table)
-    .where({ id })
-    .del();
+  return db(table).where({ id }).del();
 }
 function editById(id, update) {
-  return db(table)
-    .where({ id })
-    .update(update, "*");
+  return db(table).where({ id }).update(update, "*");
 }
 function register(obj) {
   return db(table)
