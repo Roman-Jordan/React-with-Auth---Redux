@@ -1,12 +1,12 @@
-import React from 'react'
+import React from "react";
 
-
-const Header = () =>{
-    return(
-        <header className="mainHeader" >
-            <p>I am a non Protected Header</p>      
-        </header>
-    )
-}
+const Header = (props) => {
+  console.log(props);
+  return (
+    <header className="mainHeader">
+      <p>I am a non Protected Header</p>
+    </header>
+  );
+};
 
 export default Header;

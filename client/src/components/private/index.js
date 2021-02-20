@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './header'
-import UserList from './body/UsersList'
+import UserList from './templates/UsersList'
 
 const PrivateMainView = () =>{
 

@@ -1,37 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { loginHandler } from "../../../util/axiosWithAuth";
-import axios from "axios";
 import { Route, Switch } from "react-router-dom";
-import "./forms.scss";
-import Zip from './Zip'
+
 const RegisterForm = props => {
   const [userRoles, setUserRoles] = useState();
   const [activeRole, setActiveRole] = useState();
   const [newUser, setNewUser] = useState({});
   console.log("newuser: ", newUser);
   console.log("ActiveRole: ", activeRole);
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:8080/roles/roles")
-  //     .then(res => {
-  //       setUserRoles(res.data);
-  //     })
-  //     .catch(err => alert(err));
-  // }, []);
-
+ 
   const change = e => {
     e.preventDefault();
     const role = e.target.value;
     role &&
-      // && setNewUser({...newUser,role:role})
-      // && setActiveRole(role)
       props.history.push(`/register/${role}`);
   };
 
   return (
     <div className="register-form">
-      <Zip/>
       <h1>Register as:</h1>
       <form
         onSubmit={e => {
@@ -48,10 +35,6 @@ const RegisterForm = props => {
               <RoleSelector change={change} userRoles={userRoles} />
             )}
           />
-          <Route exact path="/register/provider" render={Provider} />
-          <Route exact path="/register/sponsor" component={Sponsor} />
-          <Route exact path="/register/company" component={Company} />
-          <Route exact path="/register/consumer" component={Consumer} />
         </Switch>
       </form>
     </div>
