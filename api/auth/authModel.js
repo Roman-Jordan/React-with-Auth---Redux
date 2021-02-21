@@ -1,5 +1,4 @@
 const db = require(_dbConfig);
-const bcrypt = require("bcrypt");
 const rolesModel = require("../public/roles/roles-model");
 
 module.exports = {

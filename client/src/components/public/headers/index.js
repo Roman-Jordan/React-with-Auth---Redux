@@ -1,7 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
 const Header = (props) => {
-  console.log(props);
   return (
     <header>
       <p>I am a non Protected Header</p>
@@ -9,7 +8,7 @@ const Header = (props) => {
         <Link>link</Link>
         <Link>link</Link>
         <Link>link</Link>
-        <Link to="/login">login</Link>
+        <Link to="/login">Login</Link>
       </nav>
     </header>
   );

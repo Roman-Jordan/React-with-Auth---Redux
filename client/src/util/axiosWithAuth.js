@@ -17,7 +17,7 @@ export const axiosWithAuth = () => {
   });
 };
 
-export const loginHandler = (u,props) => (dispatch) => {
+export const loginHandler = (u, props) => (dispatch) => {
   axios
     .post(`${baseURL}/login`, { ...u })
     .then((res) => {
@@ -30,16 +30,11 @@ export const loginHandler = (u,props) => (dispatch) => {
             expires: Date(res.data.expires_in),
           })
         );
-        console.log(props)
-        props.history.push('/')
+        props.history.push("/");
         dispatch({ type: "FETCH_SUCCESS", payload: true });
       } else {
-        console.log(res.data.errors);
         dispatch({ type: "FETCH_FAIL", payload: false });
       }
     })
-    .catch(
-      (err) => console.log(err),
-      dispatch({ type: "FETCH_FAIL", payload: false })
-    );
+    .catch((err) => dispatch({ type: "FETCH_FAIL", payload: false }));
 };

@@ -3,7 +3,6 @@ const dbModel = require("./userModel");
 const usersScrubber = require("./usersScrubber");
 
 router.get("/", (req, res) => {
-  console.log('hereUsers');
   return dbModel
     .findAll()
     .then((p) => {

@@ -13,7 +13,6 @@ const LoginForm = props => {
   };
 
   const onSubmit = e => {
-    console.log(user)
     e.preventDefault();
       user.email 
       && user.password 
