@@ -13,7 +13,7 @@ const store = createStore(rootReducer,applyMiddleware(thunk));
 const renderReactDom = () =>{
     ReactDOM.render(
         <Provider  store={store}>
-            <Router>
+            <Router basename="/">
                 <App />
             </Router>
         </Provider>, document.getElementById('root')
