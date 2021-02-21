@@ -49,14 +49,15 @@ authRouter.post("/login", validateLogin, async (req, res) => {
   let user = req.user;
 
   if (user && bcrypt.compareSync(password, user.password)) {
-    user = await dbModel.findOrCreateByEmail(user);
+    user = await dbModel.loginUser(user);
     delete user.password;
 
     payload = {
       ...user,
-      token_type: "Basic ",
+      token_type: "Basic",
       token: jwt.genToken(user),
     };
+
     res.status(200).json({ message: "Login Success", ...payload });
   } else {
     res

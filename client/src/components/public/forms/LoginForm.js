@@ -5,7 +5,7 @@ import { loginHandler } from "../../../util/axiosWithAuth";
 const LoginForm = props => {
 
   let [user, setUser] = useState({});
-  let username = user.username ? user.username : "";
+  let email = user.email ? user.email : "";
   let password = user.password ? user.password : "";
 
   const change = e => {
@@ -15,7 +15,7 @@ const LoginForm = props => {
   const onSubmit = e => {
     console.log(user)
     e.preventDefault();
-      user.username 
+      user.email 
       && user.password 
       && props.loginHandler(user);
   };
@@ -27,9 +27,9 @@ const LoginForm = props => {
       <form onSubmit={onSubmit}>
         <input
           onChange={change}
-          name="username"
-          placeholder="Username"
-          value={username}
+          name="email"
+          placeholder="email"
+          value={email}
           type="text"
         />
         <input

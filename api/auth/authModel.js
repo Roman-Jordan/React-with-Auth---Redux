@@ -6,7 +6,7 @@ module.exports = {
   addUser,
   findByEmail,
   findById,
-  findOrCreateByEmail,
+  loginUser,
   removeUser,
 };
 
@@ -24,44 +24,15 @@ function findByEmail(email) {
     .first();
 }
 
-async function findOrCreateByEmail(profile) {
+async function loginUser(user) {
   //Get the proposed user
-  const email = profile.email;
-  const user = await db(table).select("email", "id").where({ email }).first();
+  const getUserRoles = await rolesModel.findAllRolesById(user.id);
 
-  //If the user exist
-  if (user) {
-    const getUserRoles = await rolesModel.findAllRolesById(user.id);
-
-    return {
-      user_id: user.id,
-      user_roles: [...getUserRoles],
-      message: "Welcome Back",
-    };
-  } else {
-    //CREATE NEW USER
-
-    //Encrypt Password, consider doing off AccessToken
-    const password =
-      profile.password || bcrypt.hashSync(Date.now() + email, 14);
-
-    //Create New User
-    const newUser = await addUser({ email, password });
-
-    //Assign User Role
-    await rolesModel.addUserRole({
-      user_id: newUser.id,
-      role_id: 2,
-    });
-
-    const getUserRoles = await rolesModel.findAllRolesById(newUser.id);
-
-    return {
-      user_profile: { ...newProfile },
-      user_roles: [...getUserRoles],
-      newUser: "Welcome New User",
-    };
-  }
+  return {
+    ...user,
+    user_roles: [...getUserRoles],
+    message: "Welcome Back",
+  };
 }
 
 function addUser(obj) {

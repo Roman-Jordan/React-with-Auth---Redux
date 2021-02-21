@@ -3,10 +3,11 @@ const dbModel = require("./userModel");
 const usersScrubber = require("./usersScrubber");
 
 router.get("/", (req, res) => {
+  console.log('hereUsers');
   return dbModel
     .findAll()
     .then((p) => {
-      res.status(200).json({ message: `SUCCESS`, roles: [...p] });
+      res.status(200).json({ message: `SUCCESS`, users: [...p] });
     })
     .catch((e) => {
       res.status(404).json({ message: "SOMEMESSAGE", ...e });
