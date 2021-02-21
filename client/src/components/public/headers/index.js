@@ -5,10 +5,8 @@ const Header = (props) => {
     <header>
       <p>I am a non Protected Header</p>
       <nav>
-        <Link>link</Link>
-        <Link>link</Link>
-        <Link>link</Link>
-        <Link to="/login">Login</Link>
+        {props.location.pathname === '/login' &&  <Link to="/register">Register</Link>}
+        {props.location.pathname === '/register' && <Link to="/login">Login</Link>}
       </nav>
     </header>
   );

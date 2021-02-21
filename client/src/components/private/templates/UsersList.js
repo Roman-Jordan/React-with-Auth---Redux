@@ -12,7 +12,7 @@ const UsersList = () => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div>
+    <div id="mainBody">
       {users &&
         users.map((user) => {
           return <UserCard key={user.id} user={user} />;

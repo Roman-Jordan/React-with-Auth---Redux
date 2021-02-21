@@ -1,12 +1,16 @@
 header {
+  position:fixed;
+  background-color: #d8d8d2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 100vw;
+  padding:0 25px;
   nav {
     display: flex;
     justify-content: space-evenly;
-    min-width:40%;
+    // min-width:40%;
     a{
         text-decoration: none;
         color:#666;

@@ -4,35 +4,41 @@ import { loginHandler } from "../../../util/axiosWithAuth";
 import { Route, Switch } from "react-router-dom";
 
 const RegisterForm = (props) => {
-  const [userRoles, setUserRoles] = useState();
-  const [activeRole, setActiveRole] = useState();
-  const [newUser, setNewUser] = useState({});
+  const [user, setUser] = useState({});
+  const email = user.email ? user.email : "";
+  const password = user.password ? user.password : "";
 
-  const change = (e) => {
+  const change = e => {
+    setUser({ ...user, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = e => {
     e.preventDefault();
-    const role = e.target.value;
-    role && props.history.push(`/register/${role}`);
+      user.email 
+      && user.password 
+      && props.loginHandler(user,props);
   };
 
   return (
-    <div className="register-form">
-      <h1>Register as:</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        {activeRole && <p>{`${activeRole.toUpperCase()} Role Selected`}</p>}
+    <div id="registerForm">
+      <h1>Register</h1>
+       <form onSubmit={onSubmit}>
+        <input
+          onChange={change}
+          name="email"
+          placeholder="email"
+          value={email}
+          type="text"
+        />
+        <input
+          onChange={change}
+          name="password"
+          placeholder="Password"
+          value={password}
+          type="password"
+        />
 
-        <Switch>
-          <Route
-            exact
-            path="/register"
-            render={() => (
-              <RoleSelector change={change} userRoles={userRoles} />
-            )}
-          />
-        </Switch>
+        <input type="submit" />
       </form>
     </div>
   );

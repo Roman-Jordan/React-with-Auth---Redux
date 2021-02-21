@@ -21,7 +21,7 @@ const LoginForm = props => {
 
 
   return (
-    <>
+    <div id="loginForm">
       <h1>Login Form</h1>
       <form onSubmit={onSubmit}>
         <input
@@ -41,7 +41,7 @@ const LoginForm = props => {
 
         <input type="submit" />
       </form>
-    </>
+    </div>
   );
 };
 

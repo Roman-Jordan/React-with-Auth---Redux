@@ -5,13 +5,12 @@ import { Route, Switch } from "react-router";
 
 const Body = (props) => {
   return (
-    <>
-      <p>I am a Public body</p>
+    <div id="mainBody">
       <Switch>
         <Route  path="/register" render={() => <RegisterForm {...props} />} />
         <Route  render={() => <LoginForm {...props} />} />
       </Switch>
-    </>
+    </div>
   );
 };
 
