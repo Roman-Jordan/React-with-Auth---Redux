@@ -17,7 +17,7 @@ export const axiosWithAuth = () => {
   });
 };
 
-export const loginHandler = (u) => (dispatch) => {
+export const loginHandler = (u,props) => (dispatch) => {
   axios
     .post(`${baseURL}/login`, { ...u })
     .then((res) => {
@@ -30,6 +30,8 @@ export const loginHandler = (u) => (dispatch) => {
             expires: Date(res.data.expires_in),
           })
         );
+        console.log(props)
+        props.history.push('/')
         dispatch({ type: "FETCH_SUCCESS", payload: true });
       } else {
         console.log(res.data.errors);

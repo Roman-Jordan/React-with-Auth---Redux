@@ -5,7 +5,7 @@ const PublicMainView = (props) => {
   return (
     <>
       <Header {...props} />
-      <Body/>
+      <Body {...props}/>
 
     </>
   );

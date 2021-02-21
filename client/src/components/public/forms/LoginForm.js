@@ -17,7 +17,7 @@ const LoginForm = props => {
     e.preventDefault();
       user.email 
       && user.password 
-      && props.loginHandler(user);
+      && props.loginHandler(user,props);
   };
 
 

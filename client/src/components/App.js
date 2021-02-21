@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 function App(props) {
   let { loggedIn } = props;
-
+  console.log(props)
   return (
     <div className="App">
       {loggedIn ? (
