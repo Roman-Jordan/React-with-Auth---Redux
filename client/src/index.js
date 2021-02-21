@@ -10,10 +10,20 @@ import {BrowserRouter as Router}  from 'react-router-dom'
 
 const store = createStore(rootReducer,applyMiddleware(thunk));
 
-ReactDOM.render(<Provider  store={store}>
-                    <Router>
-                        <App />
-                    </Router>
-                </Provider>, document.getElementById('root'));
+const renderReactDom = () =>{
+    ReactDOM.render(
+        <Provider  store={store}>
+            <Router>
+                <App />
+            </Router>
+        </Provider>, document.getElementById('root')
+    );
+}
 
-
+if (window.cordova) {
+    document.addEventListener('deviceready', () => {
+      renderReactDom();
+    }, false);
+} else {
+  renderReactDom();
+}
