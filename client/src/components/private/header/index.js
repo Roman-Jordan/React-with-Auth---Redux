@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { logOut } from "../../../store/actions";
+import { logOut } from "../../../store/actions/auth";
 const Header = (props) => {
   return (
     <header>
-      <p>I am a Protected Header</p>
+      <p>Welcome Back</p>
       <nav>
-        <Link>link</Link>
-        <Link>link</Link>
-        <Link>link</Link>
         <Link to="/" onClick={props.logOut}>
           Logout
         </Link>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { loginHandler } from '../../../store/actions/index';
+import { loginHandler } from '../../../store/actions/auth';
 
 const LoginForm = props => {
 
@@ -39,9 +39,9 @@ const LoginForm = props => {
           type="password"
         />
         {props.error && props.error.errors.map(error => {
-          return <p className="error">{Object.values(error)}</p>
+          return <p key={Object.keys(error)} className="error">{Object.values(error)}</p>
         })}
-        <input type="submit" />
+        <button type="submit" >Submit</button>
       </form>
     </div>
   );

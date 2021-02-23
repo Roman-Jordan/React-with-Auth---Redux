@@ -1,12 +1,9 @@
-import { LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT } from "../../actions";
+import { LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT } from "../../actions/auth";
 
 
 const loggedInCheck = () => {
   let token = localStorage.getItem("token");
-  token = token && JSON.parse(
-    token
-  );
-
+  
   if (token) {
     return true;
   } else {
@@ -28,7 +25,6 @@ const setToken = (token) =>{
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      console.log(action.payload)
       setToken(action.payload.token);
       return {
         ...state,

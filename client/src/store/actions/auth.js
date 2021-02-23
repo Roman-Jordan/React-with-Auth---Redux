@@ -19,5 +19,3 @@ export const loginHandler = (user) => (dispatch) => {
     })
     .catch(err => dispatch({ type: "LOGIN_ERROR", payload: { ...err.response.data } }));
 };
-
-
