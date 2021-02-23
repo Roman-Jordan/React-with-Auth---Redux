@@ -14,5 +14,5 @@ module.exports = async (req, res, next) => {
   }
 
   !!req.user ? null : errors.push("Unknown Username or Password");
-  errors.length < 1 ? next() : res.status(200).json({ errors });
+  errors.length < 1 ? next() : res.status(401).json({ errors });
 };

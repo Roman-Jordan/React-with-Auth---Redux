@@ -7,17 +7,13 @@ const LoginForm = props => {
   let [user, setUser] = useState({});
   let email = user.email ? user.email : "";
   let password = user.password ? user.password : "";
-
+  
   const change = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
-
   const onSubmit = e => {
     e.preventDefault();
-    user.email
-      && user.password
-      && props.loginHandler(user);
-    props.loggedIn && props.history.push("/")
+    props.loginHandler(user);
   };
 
   return (

@@ -10,11 +10,9 @@ export const logOut = () => dispatch => {
 }
 
 export const loginHandler = (user) => (dispatch) => {
-  console.log('called')
   axiosWithAuth()
     .post(`/login`, { ...user })
     .then((res) => {
-
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data })
     })
     .catch(err => dispatch({ type: "LOGIN_ERROR", payload: { ...err.response.data } }));

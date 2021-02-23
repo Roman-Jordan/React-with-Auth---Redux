@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { axiosWithAuth } from "../../../util/axiosWithAuth";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getUsers } from '../../../store/actions/api/users';
 
-const UsersList = () => {
-  let [users, setUsers] = useState();
+const UsersList = (props) => {
+  const { users } = props.users.users || {};
+  const { getUsers } = props;
   useEffect(() => {
-    axiosWithAuth()
-      .get("/users/")
-      .then((res) => {
-        setUsers(res.data.users);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    getUsers();
+  }, );
+
   return (
     <div id="mainBody">
       {users &&
@@ -20,14 +18,26 @@ const UsersList = () => {
     </div>
   );
 };
-export default UsersList;
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getUsers }
+)(UsersList);
+
 
 export const UserCard = (props) => {
   let { user } = props;
   return (
     user &&
     Object.keys(user).map((userProp, i) => {
-      return <p key={'key'+i}>{`${userProp}: ${user[userProp]}`}</p>;
+      return <p key={'key' + i}>{`${userProp}: ${user[userProp]}`}</p>;
     })
   );
 };
+
+
