@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { loginHandler } from "../../../util/axiosWithAuth";
+//import { loginHandler } from "../../../util/axiosWithAuth";
 import { Route, Switch } from "react-router-dom";
 
 const RegisterForm = (props) => {
@@ -14,9 +14,9 @@ const RegisterForm = (props) => {
 
   const onSubmit = e => {
     e.preventDefault();
-      user.email 
-      && user.password 
-      && props.loginHandler(user,props);
+      //user.email 
+      //&& user.password 
+     // && props.loginHandler(user,props);
   };
 
   return (
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { loginHandler })(RegisterForm);
+export default connect(mapStateToProps, null)(RegisterForm);
 
 export const RoleSelector = (props) => {
   const { userRoles, change } = props;

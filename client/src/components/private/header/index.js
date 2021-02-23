@@ -5,7 +5,7 @@ import { logOut } from "../../../store/actions";
 const Header = (props) => {
   return (
     <header>
-      <p>I am a non Protected Header</p>
+      <p>I am a Protected Header</p>
       <nav>
         <Link>link</Link>
         <Link>link</Link>

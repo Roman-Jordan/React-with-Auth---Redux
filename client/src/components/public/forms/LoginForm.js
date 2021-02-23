@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { loginHandler } from "../../../util/axiosWithAuth";
+import { loginHandler } from '../../../store/actions/index';
 
 const LoginForm = props => {
 
@@ -14,11 +14,11 @@ const LoginForm = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-      user.email 
-      && user.password 
-      && props.loginHandler(user,props);
+    user.email
+      && user.password
+      && props.loginHandler(user);
+    props.loggedIn && props.history.push("/")
   };
-
 
   return (
     <div id="loginForm">
@@ -38,7 +38,9 @@ const LoginForm = props => {
           value={password}
           type="password"
         />
-
+        {props.error && props.error.errors.map(error => {
+          return <p className="error">{Object.values(error)}</p>
+        })}
         <input type="submit" />
       </form>
     </div>

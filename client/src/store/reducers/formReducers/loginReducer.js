@@ -1,4 +1,4 @@
-import {FETCH_ERROR,FETCH_SUCCESS,LOGOUT} from "../../actions";
+import { LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT } from "../../actions";
 
 
 const loggedInCheck = () => {
@@ -7,36 +7,43 @@ const loggedInCheck = () => {
     token
   );
 
-  if(token){
+  if (token) {
     return true;
-  }else{
+  } else {
     return false;
   }
 }
 
 const initialState = {
-  loggedIn:loggedInCheck(),
-  fetching:true,
-  error:null
+  loggedIn: loggedInCheck(),
+  fetching: true,
+  error: null
 };
+
+const setToken = (token) =>{
+  localStorage.setItem("token", token);
+}
+
 
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_SUCCESS:
+    case LOGIN_SUCCESS:
+      console.log(action.payload)
+      setToken(action.payload.token);
       return {
         ...state,
-        loggedIn: action.payload,
+        loggedIn: true,
         fetching: !state.fetching
       }
     case LOGOUT:
-      return{
-        loggedIn:false
+      return {
+        loggedIn: false
       }
-    case FETCH_ERROR:
-      return{
+    case LOGIN_ERROR:
+      return {
         ...state,
         fetching: !state.fetching,
-        error:action.payload
+        error: action.payload
       }
     default:
       return state;
