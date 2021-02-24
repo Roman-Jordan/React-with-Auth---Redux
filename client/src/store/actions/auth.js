@@ -13,7 +13,14 @@ export const loginHandler = (user) => (dispatch) => {
   axiosWithAuth()
     .post(`/login`, { ...user })
     .then((res) => {
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data })
+      return !!res.data
+        ? dispatch({ type: "LOGIN_SUCCESS", payload: res.data.token })
+        : console.log(res);
     })
-    .catch(err => dispatch({ type: "LOGIN_ERROR", payload: { ...err.response.data } }));
+    .catch(err => {
+      return !!err.response.data
+        ? dispatch({ type: "LOGIN_ERROR", payload: { ...err.response.data } })
+        : console.log('Network Failier');
+    }
+    );
 };

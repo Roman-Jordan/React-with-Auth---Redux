@@ -6,7 +6,8 @@ import PrivateMainView from "./private";
 import { connect } from "react-redux";
 
 function App(props) {
-  let { loggedIn } = props;
+  let { loggedIn } = props.auth || false;
+
   return (
     <div className="App">
       {loggedIn ? (
@@ -20,7 +21,7 @@ function App(props) {
 
 const mapStateToProps = (state) => {
   return {
-    ...state.loggedIn,
+    ...state,
   };
 };
 

@@ -6,7 +6,7 @@ const UsersList = (props) => {
   const { users } = props.users.users || {};
   const { getUsers } = props;
   useEffect(() => {
-    getUsers();
+   !users && getUsers();
   }, );
 
   return (
