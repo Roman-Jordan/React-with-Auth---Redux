@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { getUsers } from '../../../store/actions/api/users';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
+import {getUsers} from '../../../store/actions/api/users';
 
 const UsersList = (props) => {
-  const { users } = props.users.users || {};
-  const { getUsers } = props;
+  const {users} = props.users.users || {};
+  const {getUsers} = props;
+
   useEffect(() => {
-   !users && getUsers();
-  }, );
+    !users && getUsers();
+  } );
 
   return (
     <div id="mainBody">
@@ -18,20 +19,20 @@ const UsersList = (props) => {
     </div>
   );
 };
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    ...state
+    ...state,
   };
 };
 
 export default connect(
-  mapStateToProps,
-  { getUsers }
+    mapStateToProps,
+    {getUsers},
 )(UsersList);
 
 
 export const UserCard = (props) => {
-  let { user } = props;
+  const {user} = props;
   return (
     user &&
     Object.keys(user).map((userProp, i) => {

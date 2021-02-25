@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
-//import { loginHandler } from "../../../util/axiosWithAuth";
-import { Route, Switch } from "react-router-dom";
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+
 
 const RegisterForm = (props) => {
   const [user, setUser] = useState({});
-  const email = user.email ? user.email : "";
-  const password = user.password ? user.password : "";
+  const email = user.email ? user.email : '';
+  const password = user.password ? user.password : '';
 
-  const change = e => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const change = (e) => {
+    setUser({...user, [e.target.name]: e.target.value});
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    //user.email 
-    //&& user.password 
+    // user.email
+    // && user.password
     // && props.loginHandler(user,props);
   };
 

@@ -1,74 +1,89 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { loginHandler } from '../../../store/actions/auth';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {loginHandler} from '../../../store/actions/auth';
 import Loader from 'react-loader-spinner';
+import PropTypes from 'prop-types';
 
-const LoginForm = props => {
+const LoginForm = (props) => {
+  LoginForm.propTypes = {
+    loginHandler: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+  };
+  const {errors} = props.auth || null;
+  const [user, setUser] = useState({});
+  const [fetching, setFetching] = useState(false);
 
-  let {error} = props.auth || null;
-  let [user, setUser] = useState({});
-  let [fetching, setFetching] = useState(false);
+  const email = user.email ? user.email : '';
+  const password = user.password ? user.password : '';
 
-  let email = user.email ? user.email : "";
-  let password = user.password ? user.password : "";
-
-  const change = e => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+  const change = (e) => {
+    setUser({...user, [e.target.name]: e.target.value});
   };
 
-  function timeout(delay) {
-    return new Promise(res => setTimeout(res, delay));
-  }
 
-  const onSubmit = async e => {
+  const timeout = (delay) => {
+    return new Promise((res) => setTimeout(res, delay));
+  };
+
+  const onSubmit = async (e) => {
     e.preventDefault();
-    props.auth.error = null;
+    props.auth.errors = null;
     setFetching(true);
     await timeout(2000);
-    props.loginHandler(user)
-    
+    props.loginHandler(user);
   };
-error && fetching && setFetching(false)
 
-return (
-  <div id="loginForm">
-    <h1>Login Form</h1>
-    <form onSubmit={onSubmit}>
-      <input
-        onChange={change}
-        name="email"
-        placeholder="email"
-        value={email}
-        type="text"
-      />
-      <input
-        onChange={change}
-        name="password"
-        placeholder="Password"
-        value={password}
-        type="password"
-      />
-      {error && error.errors.map(error => {
-        return <p key={Object.keys(error)} className="error">{Object.values(error)}</p>
-      })}
-      <button type="submit" >
-        {fetching
-          ? <Loader type="ThreeDots" color="#00BFFF" height={20} width={20} />
-          : 'Submit'
-        }
-      </button>
-    </form>
-  </div>
-);
+  // Turn Fetching state off
+  errors && fetching && setFetching(false);
+  return (
+    <div id="loginForm">
+      <h1>Login Form</h1>
+      <form onSubmit={onSubmit}>
+        {errors &&
+          errors.auth &&
+          <p className="error">{errors.auth}</p>}
+        <div>
+          <input
+            onChange={change}
+            name="email"
+            placeholder="email"
+            value={email}
+            type="text"
+          />
+          {errors &&
+          errors.email &&
+          <p className="error">{errors.email}</p>}
+        </div>
+        <div>
+          <input
+            onChange={change}
+            name="password"
+            placeholder="Password"
+            value={password}
+            type="password"
+          />
+          {!!errors &&
+          errors.password &&
+          <p className="error">{errors.password}</p>}
+        </div>
+        <button type="submit" >
+          {fetching ?
+            <Loader type="ThreeDots" color="#00BFFF" height={20} width={20} /> :
+            'Submit'
+          }
+        </button>
+      </form>
+    </div>
+  );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    ...state
+    ...state,
   };
 };
 
 export default connect(
-  mapStateToProps,
-  { loginHandler }
+    mapStateToProps,
+    {loginHandler},
 )(LoginForm);

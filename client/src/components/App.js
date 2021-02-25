@@ -1,12 +1,12 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import PrivateRoute from "../util/PrivateRoute";
-import PublicMainView from "./public";
-import PrivateMainView from "./private";
-import { connect } from "react-redux";
+import React from 'react';
+import {Route} from 'react-router-dom';
+import PrivateRoute from '../util/PrivateRoute';
+import PublicMainView from './public';
+import PrivateMainView from './private';
+import {connect} from 'react-redux';
 
-function App(props) {
-  let { loggedIn } = props.auth || false;
+const App = (props) => {
+  const {loggedIn} = props.auth || false;
 
   return (
     <div className="App">
@@ -17,7 +17,7 @@ function App(props) {
       )}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return {

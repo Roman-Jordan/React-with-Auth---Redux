@@ -1,7 +1,7 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { logOut } from "../../../store/actions/auth";
+import React from 'react';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {logOut} from '../../../store/actions/auth';
 const Header = (props) => {
   return (
     <header>
@@ -21,4 +21,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logOut })(Header);
+export default connect(mapStateToProps, {logOut})(Header);

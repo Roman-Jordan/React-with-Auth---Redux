@@ -1,4 +1,4 @@
-import { USERS_ERRORS, USERS_SUCCESS} from "../../actions/api/users";
+import {USERS_ERRORS, USERS_SUCCESS} from '../../actions/api/users';
 
 
 const initialState = {
@@ -13,14 +13,14 @@ export const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         fetching: !state.fetching,
-        users:action.payload,
-      }
+        users: action.payload,
+      };
     case USERS_ERRORS:
       return {
         ...state,
         fetching: !state.fetching,
         error: action.payload,
-      }
+      };
     default:
       return state;
   }

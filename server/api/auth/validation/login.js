@@ -2,17 +2,18 @@ const dbModel = require("../authModel");
 
 //If succesful, creates req.user
 module.exports = async (req, res, next) => {
-  const errors = [];
+  const errors = {};
   const user = req.body;
 
   // required fields
-  !!user.password ? null : errors.push("Password: required");
-  !!user.email ? null : errors.push("email: required");
+  !!user.password ? null : errors.password = 'Password is Required'
+  !!user.email ? null : errors.email = 'Email is Required';
 
-  if (!errors.length) {
+  //Does the user exist
+  if (Object.keys(errors).length < 1 ) {
     req.user = await dbModel.findByEmail(user.email);
+    !!req.user ? null : errors.auth = 'Unknown Username or Password';
   }
 
-  !!req.user ? null : errors.push("Unknown Username or Password");
-  errors.length < 1 ? next() : res.status(401).json({ errors });
+  Object.keys(errors).length < 1 ? next() : res.status(401).json({ errors });
 };

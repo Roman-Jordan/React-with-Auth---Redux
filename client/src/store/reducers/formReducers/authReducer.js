@@ -1,13 +1,20 @@
-import { LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT } from "../../actions/auth";
+import {LOGIN_ERROR, LOGIN_SUCCESS, LOGOUT} from '../../actions/auth';
 
-const initialState = {
-  loggedIn: false,
-  error: null,
+const checkLogedIn = () =>{
+  return localStorage.getItem('token') ?
+    true :
+    false;
 };
 
 const setToken = (token) =>{
-  localStorage.setItem("token", token);
-}
+  console.log(token);
+  localStorage.setItem('token', token);
+};
+
+const initialState = {
+  loggedIn: checkLogedIn(),
+  errors: null,
+};
 
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -16,17 +23,17 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         loggedIn: true,
-      }
+      };
     case LOGOUT:
       return {
-        loggedIn: false
-      }
+        loggedIn: false,
+      };
     case LOGIN_ERROR:
       return {
         ...state,
         loggedIn: false,
-        error: action.payload
-      }
+        errors: {...action.payload.errors},
+      };
     default:
       return state;
   }

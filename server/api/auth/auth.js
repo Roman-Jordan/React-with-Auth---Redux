@@ -62,7 +62,7 @@ authRouter.post("/login", validateLogin, async (req, res) => {
   } else {
     res
       .status(401)
-      .json({ errors: [{ password: "Invalid Username Or Password" }] });
+      .json({ errors: { auth: "Invalid Username Or Password" } });
   }
 });
 
