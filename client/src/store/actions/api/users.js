@@ -5,7 +5,7 @@ export const USERS_SUCCESS = 'USERS_SUCCESS';
 export const USERS_ERRORS = 'USERS_ERRORS';
 
 export const getUsers = () => (dispatch) => {
-  axiosWithAuth()
+  return axiosWithAuth()
       .get('/users')
       .then((res) => {
         dispatch({type: USERS_SUCCESS, payload: res.data});

@@ -9,6 +9,7 @@ const LoginForm = (props) => {
     loginHandler: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
   };
+
   const {errors} = props.auth || null;
   const [user, setUser] = useState({});
   const [fetching, setFetching] = useState(false);

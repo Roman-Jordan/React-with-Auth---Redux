@@ -6,11 +6,6 @@ const checkLogedIn = () =>{
     false;
 };
 
-const setToken = (token) =>{
-  console.log(token);
-  localStorage.setItem('token', token);
-};
-
 const initialState = {
   loggedIn: checkLogedIn(),
   errors: null,
@@ -19,7 +14,6 @@ const initialState = {
 export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:
-      setToken(action.payload.token);
       return {
         ...state,
         loggedIn: true,

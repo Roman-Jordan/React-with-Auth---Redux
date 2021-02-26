@@ -12,3 +12,5 @@ const PrivateMainView = () =>{
 };
 
 export default PrivateMainView;
+
+

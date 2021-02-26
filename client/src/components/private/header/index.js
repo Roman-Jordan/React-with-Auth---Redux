@@ -2,10 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logOut} from '../../../store/actions/auth';
+import PropTypes from 'prop-types';
 const Header = (props) => {
+  Header.propTypes = {
+    logOut: PropTypes.func.isRequired,
+  };
   return (
     <header>
-      <p>Welcome Back</p>
+      <h2>Welcome Back</h2>
       <nav>
         <Link to="/" onClick={props.logOut}>
           Logout

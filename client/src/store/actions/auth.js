@@ -13,6 +13,10 @@ export const loginHandler = (user) => (dispatch) => {
   axiosWithAuth()
       .post(`/login`, {...user})
       .then((res) => {
+        if (!res.data.token) {
+          throw new Error();
+        };
+        localStorage.setItem('token', res.data.token);
         dispatch({type: 'LOGIN_SUCCESS', payload: {...res.data}});
       })
       .catch((err) => {
