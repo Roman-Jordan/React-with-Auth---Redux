@@ -9,17 +9,18 @@ const UsersList = (props) => {
     getUsers: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
   };
-  const {users} = props.users.users || {};
+  const {users} = props;
   const {getUsers} = props;
-  const {loggedIn} = props.auth;
+
+  console.log(props.auth);
   useEffect(() => {
-    !users && loggedIn && getUsers();
-  } );
+    users.fetching && getUsers();
+  });
 
   return (
     <div id="mainBody">
-      {users &&
-        users.map((user) => {
+      {users.users &&
+        users.users.map((user) => {
           return <UserCard key={user.id} user={user} />;
         })}
     </div>

@@ -10,16 +10,26 @@ export const logOut = () => (dispatch) => {
 };
 
 export const loginHandler = (user) => (dispatch) => {
-  axiosWithAuth()
+  return axiosWithAuth()
       .post(`/login`, {...user})
       .then((res) => {
         if (!res.data.token) {
           throw new Error();
         };
         localStorage.setItem('token', res.data.token);
-        dispatch({type: 'LOGIN_SUCCESS', payload: {...res.data}});
+        return dispatch({type: 'LOGIN_SUCCESS', payload: {...res.data}});
       })
       .catch((err) => {
-        dispatch({type: 'LOGIN_ERROR', payload: {...err.response.data}});
+        if (!err.response.data) {
+          throw new Error();
+        };
+        return dispatch({type: 'LOGIN_ERROR', payload: {...err.response.data}});
+      }).catch((err) =>{
+        return dispatch({
+          type: 'LOGIN_ERROR',
+          payload: {
+            errors: {network: 'A network error has occured'},
+          },
+        });
       });
 };

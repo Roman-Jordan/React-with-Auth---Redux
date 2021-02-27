@@ -4,7 +4,7 @@ import {USERS_ERRORS, USERS_SUCCESS} from '../../actions/api/users';
 const initialState = {
   fetching: true,
   error: null,
-  users: {},
+  users: [],
 };
 
 export const usersReducer = (state = initialState, action) => {

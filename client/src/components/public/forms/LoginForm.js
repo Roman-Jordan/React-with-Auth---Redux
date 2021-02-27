@@ -21,16 +21,10 @@ const LoginForm = (props) => {
     setUser({...user, [e.target.name]: e.target.value});
   };
 
-
-  const timeout = (delay) => {
-    return new Promise((res) => setTimeout(res, delay));
-  };
-
   const onSubmit = async (e) => {
     e.preventDefault();
     props.auth.errors = null;
     setFetching(true);
-    await timeout(2000);
     props.loginHandler(user);
   };
 
@@ -74,6 +68,9 @@ const LoginForm = (props) => {
           }
         </button>
       </form>
+      {errors &&
+          errors.network &&
+          <p className="error">{errors.network}</p>}
     </div>
   );
 };
