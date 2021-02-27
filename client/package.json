@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "postbuild": "rm -rf ../www && mv ./build ../www && cordova build android",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "newapi":"cd .. && sh ./superpower/newApi.sh"
   },
   "eslintConfig": {
     "extends": "react-app"

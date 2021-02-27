@@ -12,7 +12,6 @@ const UsersList = (props) => {
   const {users} = props;
   const {getUsers} = props;
 
-  console.log(props.auth);
   useEffect(() => {
     users.fetching && getUsers();
   });

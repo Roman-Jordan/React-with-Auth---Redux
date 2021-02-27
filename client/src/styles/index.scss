@@ -21,7 +21,6 @@ code {
 * {
   box-sizing: border-box;
 }
-
 #mainBody{
   display: flex;
   flex-direction: column;
@@ -31,6 +30,11 @@ code {
   max-width: 100%;
   overflow: hidden;
   min-height: 100vh;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .error{

@@ -1,9 +1,11 @@
 #loginForm{
     display: inline-block;
-    background-color: #ddd;
+    background-color: rgba(31.0, 31.0, 25.0, .8);
     margin:auto;
     padding:20px;
-    
+    border-radius: 25px;
+    -webkit-box-shadow: inset 9px 0px 50px 15px rgba(0,0,0,0.3); 
+    box-shadow: inset 9px 0px 50px 15px rgba(0,0,0,0.3);
     form{
         display: flex;
         flex-direction: column;
@@ -11,8 +13,9 @@
         align-items: center;
         input{ 
             margin:10px;
+            border:none;
             border-radius: 5px;
-            padding:3px;
+            padding:10px 5px;
             font-size: medium;
         }
     }

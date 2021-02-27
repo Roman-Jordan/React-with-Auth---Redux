@@ -1,12 +1,17 @@
 header {
   position:fixed;
-  background-color: #d8d8d2;
+  background-color: rgba(31.0, 31.0, 25.0, .96);
+  -webkit-box-shadow: inset 9px 0px 50px 15px rgba(0,0,0,0.3); 
+  box-shadow: inset 9px 0px 50px 15px rgba(0,0,0,0.3);
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   max-width: 100vw;
   padding:0 25px;
+  h2{
+    color:#fff;
+  }
   nav {
     display: flex;
     justify-content: space-evenly;

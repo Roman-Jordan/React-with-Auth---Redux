@@ -8,9 +8,9 @@ export const getUsers = () => (dispatch) => {
   return axiosWithAuth()
       .get('/users')
       .then((res) => {
-        dispatch({type: USERS_SUCCESS, payload: res.data.users});
+        return dispatch({type: USERS_SUCCESS, payload: res.data.users});
       })
       .catch((err) => {
-        dispatch({type: USERS_SUCCESS, payload: err.response.data});
+        return dispatch({type: USERS_SUCCESS, payload: err.response.data});
       });
 };
