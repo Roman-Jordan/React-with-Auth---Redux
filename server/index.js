@@ -42,6 +42,10 @@ server.use("/", (error, req, res, next) => {
   }
 });
 
+server.use("*", ( req, res) => {
+  res.status(200).json({ errors: 'You\'ve Some how managed to bypass the gate keeper.'});
+});
+
 //Turn this bad chicken with some style yo
 server.listen(PORT, () => {
   lg(`

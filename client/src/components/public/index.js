@@ -6,7 +6,6 @@ const PublicMainView = (props) => {
     <>
       <Header {...props} />
       <Body {...props}/>
-
     </>
   );
 };
