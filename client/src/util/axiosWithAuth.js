@@ -8,7 +8,7 @@ export const axiosWithAuth = () => axios.create({
   baseURL: baseURL,
   timeout: 1000,
   headers: {
-    Authorization: `Basic ${localStorage.getItem('token')}`,
+    Authorization: localStorage.getItem('token'),
   },
 });
 

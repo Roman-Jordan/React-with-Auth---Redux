@@ -35,6 +35,7 @@ server.use("/", primaryRouter);
 //Implement Static Routes
 server.use("/", (error, req, res, next) => {
   if (error) {
+    console.log(error)
     res.status(200).json({ errors: error });
   } else {
     next();

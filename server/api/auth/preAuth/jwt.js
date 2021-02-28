@@ -44,7 +44,8 @@ function chkRole(role) {
 //Verifies Existing Role and JWT token
 function chkToken() {
   return (req, res, next) => {
-    const token = req.headers.authorization.split(' ')[1];
+
+    const token = req.headers.authorization || null;
     
     token &&
       jwt.verify(token, secret, async (err, decoded) => {
