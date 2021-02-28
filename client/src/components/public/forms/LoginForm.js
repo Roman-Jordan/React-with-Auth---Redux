@@ -32,7 +32,7 @@ const LoginForm = (props) => {
   errors && fetching && setFetching(false);
   return (
     <div id="loginForm">
-      <h1>Login Form</h1>
+      <h1>Sign In</h1>
       <form onSubmit={onSubmit}>
         {errors &&
           errors.auth &&
@@ -71,6 +71,7 @@ const LoginForm = (props) => {
       {errors &&
           errors.network &&
           <p className="error">{errors.network}</p>}
+      <a href="#">Forgot Credintials...</a>
     </div>
   );
 };

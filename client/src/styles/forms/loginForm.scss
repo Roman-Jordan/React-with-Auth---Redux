@@ -6,6 +6,9 @@
     border-radius: 12px 0px 12px 0px ;
     -webkit-box-shadow: inset 9px 0px 50px 15px rgba(255,255,255,0.3); 
     box-shadow: inset 9px 0px 50px 15px rgba(255,255,255,0.3);
+    h1{
+        color:#fff;
+    }
     form{
         display: flex;
         flex-direction: column;
@@ -21,7 +24,7 @@
         button{
             background-color:#008CBA;
             color: #fff;
-            font-size: 14px;
+            font-size: medium;
             margin:10px 20px;
             width:90%;
             border-radius: 3px;
@@ -29,6 +32,13 @@
             text-decoration: none;
             border:none;
             font-family: 'Roboto';
+            cursor: pointer;
         }
+    }
+    a{
+        color:#fff;
+        text-decoration: none;
+        text-align: left;
+        margin-right: 35%;
     }
 }
