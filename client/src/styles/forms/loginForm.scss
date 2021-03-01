@@ -33,6 +33,7 @@
             border:none;
             font-family: 'Roboto';
             cursor: pointer;
+            outline:none;
         }
     }
     a{
@@ -40,5 +41,6 @@
         text-decoration: none;
         text-align: left;
         margin-right: 35%;
+        text-decoration: underline;
     }
 }
