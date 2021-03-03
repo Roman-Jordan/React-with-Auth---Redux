@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd ./client && npm run build",
-    "postbuild":"mv ./platforms/android/app/build/outputs/apk/debug/app-debug.apk ./builds/android/",
+    "postbuild": "mv ./platforms/android/app/build/outputs/apk/debug/app-debug.apk ./builds/android/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
