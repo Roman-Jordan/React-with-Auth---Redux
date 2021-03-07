@@ -1,52 +1,24 @@
 const dbModel = require("../authModel");
+
+//If succesful, creates req.user
 module.exports = async (req, res, next) => {
-  const errors = [];
+  const errors = {};
+  const user = req.body;
 
-  function validateNewUser(user) {
-    //Check For Keys
-    const u = user
-    !u.email && errors.push({ email: "required" });
-    !u.password && errors.push({ password: "required" });
+  // required fields
+  !!user.password ? null : errors.password = 'Password is Required'
+  !!user.email ? null : errors.email = 'Email is Required';
 
-    //Validate Char Length
-    Object.keys(user).map(x => {
-      if (x === "password" || x === "email") {
-        const key = u[x].length;
-
-        //Verifiy Length Min
-        if (key < 5 && x) {
-          errors.push({ [x]: "Must be a minimum of 5 chars" });
-        }
-
-        //Verifiy Length Max
-        if (key > 50 && x) {
-          errors.push({ [x]: "Must be a maximum of 50 chars" });
-        }
-
-        if (x === "email") {
-          //Cats got your keyboard... When in dbout, RegEx it out
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(u[x]) &&
-            errors.push({[x]: "Unexpected Eamil Address" });
-        }
-
-      } else {
-        //Why except dirty keys
-        errors.push({ error: `Unexpected key: [${x}] provide` });
-      }
-    });
+  //Validate email is real. 
+  if (!!user.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
+    errors.email = "Unexpected Eamil Address";
   }
-  
-  //Invoke the above function
-  validateNewUser(req.body);
-  //Does the user exist?
-  if (!errors.length) {
-    await dbModel
-      .findByEmail(req.body.email)
-      .then(
-        user => user && errors.push({ email: "User Already Exists" })
-      );
+
+  //Does the user exist
+  if (Object.keys(errors).length < 1) {
+    req.user = await dbModel.findByEmail(user.email);
+    !!req.user ? null : errors.auth = 'Unknown Username or Password';
   }
-  
-  //OK We are probably safe to move on
-  return errors.length < 1 ? next() : res.status(200).json({ errors });
+
+  Object.keys(errors).length < 1 ? next() : res.status(401).json({ errors });
 };
