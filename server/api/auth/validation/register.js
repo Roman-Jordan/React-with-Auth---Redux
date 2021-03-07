@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
   //Does the user exist
   if (Object.keys(errors).length < 1) {
     req.user = await dbModel.findByEmail(user.email);
-    !!req.user ? null : errors.auth = 'Unknown Username or Password';
+    !!req.user ? null : errors.auth = 'Looks like you may already be a member...';
   }
 
   Object.keys(errors).length < 1 ? next() : res.status(401).json({ errors });

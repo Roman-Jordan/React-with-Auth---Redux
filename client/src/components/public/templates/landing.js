@@ -10,7 +10,7 @@ const Body = (props) => {
   Body.propTypes = {
     nasa: PropTypes.shape({
       url: PropTypes.string,
-      fething: PropTypes.bool.isRequired,
+      fetching: PropTypes.bool.isRequired,
       nasa: PropTypes.object.isRequired,
     }),
     getNasa: PropTypes.func.isRequired,
