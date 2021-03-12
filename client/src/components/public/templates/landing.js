@@ -18,7 +18,7 @@ const Body = (props) => {
 
   const {nasa} = props.nasa;
   useEffect(() => {
-    !props.nasa.nasa.url && props.getNasa();
+    !nasa.url && props.getNasa();
   });
   console.log(props.nasa);
 
